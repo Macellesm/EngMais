@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,62 +9,58 @@ body {
 }
 
 .quiz-container {
-    background-color: white;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
-    text-align: center;
 }
 
 h1 {
+    text-align: center;
+}
+
+#question-container {
     margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 #options-container {
     margin-top: 20px;
 }
 
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
 .option {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px 0;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    margin: 5px 0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
 }
 
 .option:hover {
-    background-color: #e2e6ea;
+    background-color: #ddd;
 }
 
 .selected {
-    background-color: #d6d8db;
+    background-color: #a8d08d;
 }
 
-.correct {
-    background-color: #28a745;
-}
-
-.incorrect {
-    background-color: #dc3545;
+.selected:hover {
+    background-color: #8cbf7d;
 }
