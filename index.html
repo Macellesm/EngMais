@@ -3,14 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Indução Magnética</title>
+    <title>Quiz sobre Indução Magnética</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Quiz de Indução Magnética</h1>
-        <div id="quiz"></div>
-        <button id="submit">Enviar Respostas</button>
+        <h1>Quiz sobre Indução Magnética</h1>
+        <form id="quiz-form">
+            <div class="question">
+                <p>1. O que é indução magnética?</p>
+                <label><input type="radio" name="q1" value="A"> A) A criação de um campo elétrico por um campo magnético variável.</label>
+                <label><input type="radio" name="q1" value="B"> B) A criação de um campo magnético por uma corrente elétrica constante.</label>
+                <label><input type="radio" name="q1" value="C"> C) A geração de luz através de ímãs.</label>
+                <label><input type="radio" name="q1" value="D"> D) A atração entre dois ímãs.</label>
+            </div>
+
+            <div class="question">
+                <p>2. Qual é a Lei de Faraday?</p>
+                <label><input type="radio" name="q2" value="A"> A) A variação da corrente elétrica é proporcional ao tempo de variação do campo magnético.</label>
+                <label><input type="radio" name="q2" value="B"> B) A variação do campo elétrico é inversamente proporcional à distância.</label>
+                <label><input type="radio" name="q2" value="C"> C) A corrente elétrica gera um campo magnético em torno de um condutor.</label>
+                <label><input type="radio" name="q2" value="D"> D) A força magnética entre dois corpos é inversamente proporcional à sua massa.</label>
+            </div>
+
+            <div class="question">
+                <p>3. Qual dispositivo utiliza a indução magnética?</p>
+                <label><input type="radio" name="q3" value="A"> A) Bússola.</label>
+                <label><input type="radio" name="q3" value="B"> B) Transformador.</label>
+                <label><input type="radio" name="q3" value="C"> C) Termômetro.</label>
+                <label><input type="radio" name="q3" value="D"> D) Altímetro.</label>
+            </div>
+
+            <div class="question">
+                <p>4. Qual das seguintes aplicações da indução eletromagnética é usada na engenharia biomédica?</p>
+                <label><input type="radio" name="q4" value="A"> A) A criação de correntes elétricas no cérebro para modular atividades neurais, como na estimulação magnética transcraniana (TMS).</label>
+                <label><input type="radio" name="q4" value="B"> B) A geração de ondas magnéticas constantes para facilitar a circulação sanguínea em órgãos específicos.</label>
+                <label><input type="radio" name="q4" value="C"> C) A utilização de campos magnéticos para realizar cortes precisos em tecidos biológicos.</label>
+                <label><input type="radio" name="q4" value="D"> D) A aplicação de correntes magnéticas fixas para aumentar a resistência óssea.</label>
+            </div>
+
+            <div class="question">
+                <p>5. Como a indução eletromagnética é usada na engenharia aeronáutica?</p>
+                <label><input type="radio" name="q5" value="A"> A) A geração de empuxo direto em aeronaves usando motores de combustão magnética.</label>
+                <label><input type="radio" name="q5" value="B"> B) A criação de sistemas de controle automático de cabine utilizando ímãs fixos.</label>
+                <label><input type="radio" name="q5" value="C"> C) A detecção de falhas em estruturas metálicas das aeronaves por meio de correntes induzidas (Eddy Currents).</label>
+                <label><input type="radio" name="q5" value="D"> D) O aumento da aerodinâmica das asas utilizando campos magnéticos pulsantes.</label>
+            </div>
+
+            <button type="button" onclick="checkAnswers()">Verificar Respostas</button>
+        </form>
         <div id="results"></div>
     </div>
     <script src="script.js"></script>
