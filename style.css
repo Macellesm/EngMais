@@ -16,10 +16,10 @@ body {
     width: 80%;
     max-width: 600px;
     padding: 20px;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     color: #333;
 }
 
@@ -32,11 +32,10 @@ h1 {
 #options {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    gap: 10px;
 }
 
 #options button {
-    margin: 10px 0;
     padding: 15px;
     border: none;
     border-radius: 5px;
@@ -44,37 +43,45 @@ h1 {
     color: white;
     font-size: 1.2em;
     cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 #options button:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-.selected {
-    background-color: #4CAF50; /* Verde para indicar seleção */
+#options button.selected {
+    background-color: #0056b3;
+    font-weight: bold;
 }
 
 #next {
-    background-color: #28a745;
-    border-radius: 5px;
+    margin-top: 20px;
     padding: 10px 20px;
-    color: white;
     border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
     font-size: 1.2em;
     cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    display: none; /* Inicialmente escondido */
+    transition: background-color 0.3s;
 }
 
 #next:disabled {
-    background-color: #d6d6d6;
+    background-color: #cccccc;
     cursor: not-allowed;
 }
 
-#next:hover {
+#next:hover:not(:disabled) {
     background-color: #218838;
+}
+
+#score-container {
+    margin-top: 20px;
+}
+
+#score {
+    font-size: 1.2em;
+    color: #333;
 }
