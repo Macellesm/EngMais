@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz: Indução Eletromagnética</title>
+    <title>Quiz sobre Indução Magnética</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Quiz: Indução Eletromagnética</h1>
-        <div id="question-container">
-            <p id="question"></p>
-            <div id="options-container"></div>
+        <h1>Quiz: Indução Magnética</h1>
+        <div id="quiz">
+            <div id="question">Carregando pergunta...</div>
+            <div id="options"></div>
         </div>
-        <button id="next-button" onclick="nextQuestion()" style="display: none;">Próxima Pergunta</button>
+        <button id="next" disabled>Próxima</button>
+        <div id="score-container" style="display:none;">
+            <h2>Seu resultado:</h2>
+            <p id="score"></p>
+        </div>
     </div>
-
-    <script src="quiz.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
