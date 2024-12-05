@@ -46,31 +46,35 @@ let currentQuestionIndex = 0;
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
     document.getElementById('question').textContent = question.question;
-    const optionsContainer = document.getElementById('options-container');
+    const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
 
     question.options.forEach((option, index) => {
         const button = document.createElement('button');
         button.classList.add('option');
         button.textContent = option;
-        button.onclick = () => selectOption(index);
+        button.onclick = () => selectOption(index, button);
         optionsContainer.appendChild(button);
     });
 
-    document.getElementById('next-button').style.display = 'none';
+    document.getElementById('next').style.display = 'none';
 }
 
-function selectOption(index) {
+function selectOption(index, button) {
     const question = questions[currentQuestionIndex];
     const options = document.querySelectorAll('.option');
-    options.forEach((option, i) => {
+    
+    // Remover a seleção de outras opções
+    options.forEach(option => {
         option.classList.remove('selected');
-        if (i === index) {
-            option.classList.add('selected');
-        }
     });
-    document.getElementById('next-button').style.display = 'block';
-    document.getElementById('next-button').onclick = () => nextQuestion(index === question.correct);
+
+    // Marcar a opção selecionada
+    button.classList.add('selected');
+    
+    // Habilitar o botão "Próxima"
+    document.getElementById('next').disabled = false;
+    document.getElementById('next').onclick = () => nextQuestion(index === question.correct);
 }
 
 function nextQuestion(isCorrect) {
@@ -88,6 +92,9 @@ function nextQuestion(isCorrect) {
         currentQuestionIndex++;
         loadQuestion();
     }
+
+    // Resetar o botão "Próxima" após avançar
+    document.getElementById('next').disabled = true;
 }
 
 loadQuestion();
