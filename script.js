@@ -28,7 +28,28 @@ const questions = [
             "James Clerk Maxwell"
         ],
         correct: 1
+    },
+    {
+        question: "Qual das seguintes aplicações da indução eletromagnética é usada na engenharia biomédica?",
+        options: [
+            "A criação de correntes elétricas no cérebro para modular atividades neurais, como na estimulação magnética transcraniana (TMS).",
+            "A geração de ondas magnéticas constantes para facilitar a circulação sanguínea em órgãos específicos.",
+            "A utilização de campos magnéticos para realizar cortes precisos em tecidos biológicos.",
+            "A aplicação de correntes magnéticas fixas para aumentar a resistência óssea."
+        ],
+        correct: 1
+    },
+     {
+        question: "Como a indução eletromagnética é usada na engenharia aeronáutica?",
+        options: [
+            "A geração de empuxo direto em aeronaves usando motores de combustão magnética.",
+            "A criação de sistemas de controle automático de cabine utilizando ímãs fixos.",
+            "A detecção de falhas em estruturas metálicas das aeronaves por meio de correntes induzidas (Eddy Currents).",
+            "O aumento da aerodinâmica das asas utilizando campos magnéticos pulsantes."
+        ],
+        correct: 1
     }
+    
 ];
 
 let currentQuestion = 0;
