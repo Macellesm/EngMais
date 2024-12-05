@@ -1,4 +1,4 @@
-const quizData = [
+const questions = [
     {
         question: "O que é indução magnética?",
         options: [
@@ -51,48 +51,57 @@ const quizData = [
     }
 ];
 
-const quizContainer = document.getElementById("quiz");
-const resultsContainer = document.getElementById("results");
-const submitButton = document.getElementById("submit");
+let currentQuestionIndex = 0;
+let score = 0;
 
-function buildQuiz() {
-    const output = quizData.map((currentQuestion, questionNumber) => {
-        const answers = currentQuestion.options.map(
-            (option, index) => `
-                <label>
-                    <input type="radio" name="question${questionNumber}" value="${index}">
-                    ${option}
-                </label>
-            `
-        ).join("");
-        return `
-            <div class="question">${currentQuestion.question}</div>
-            <div class="answers">${answers}</div>
-        `;
-    });
-    quizContainer.innerHTML = output.join("");
+function displayQuestion() {
+    const questionContainer = document.getElementById('question-container');
+    const question = questions[currentQuestionIndex];
+    questionContainer.innerHTML = `
+        <p>${question.question}</p>
+        ${question.options.map((option, index) => `
+            <button class="option" onclick="selectOption(${index})">${option}</button>
+        `).join('')}
+    `;
 }
 
-function showResults() {
-    const answerContainers = quizContainer.querySelectorAll(".answers");
-    let numCorrect = 0;
+function selectOption(index) {
+    const buttons = document.querySelectorAll('.option');
+    const question = questions[currentQuestionIndex];
 
-    quizData.forEach((currentQuestion, questionNumber) => {
-        const answerContainer = answerContainers[questionNumber];
-        const selector = `input[name=question${questionNumber}]:checked`;
-        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-        if (Number(userAnswer) === currentQuestion.correct) {
-            numCorrect++;
-            answerContainers[questionNumber].style.color = "green";
-        } else {
-            answerContainers[questionNumber].style.color = "red";
+    buttons.forEach((button, i) => {
+        if (i === question.correct) {
+            button.classList.add('selected');
+        } else if (i === index) {
+            button.classList.add('wrong');
         }
+        button.disabled = true;
     });
 
-    resultsContainer.innerHTML = `${numCorrect} de ${quizData.length} corretas.`;
+    if (index === question.correct) {
+        score++;
+    }
+
+    document.getElementById('next-button').style.display = 'block';
 }
 
-buildQuiz();
-submitButton.addEventListener("click", showResults);
+function nextQuestion() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        displayQuestion();
+        document.getElementById('next-button').style.display = 'none';
+    } else {
+        showResult();
+    }
+}
 
+function showResult() {
+    const questionContainer = document.getElementById('question-container');
+    questionContainer.innerHTML = `
+        <h2>Quiz Concluído!</h2>
+        <p>Você acertou ${score} de ${questions.length} perguntas.</p>
+    `;
+    document.getElementById('next-button').style.display = 'none';
+}
+
+window.onload = displayQuestion;
