@@ -37,7 +37,7 @@ const questions = [
             "A utilização de campos magnéticos para realizar cortes precisos em tecidos biológicos.",
             "A aplicação de correntes magnéticas fixas para aumentar a resistência óssea."
         ],
-        correct: 1
+        correct: 0
     },
      {
         question: "Como a indução eletromagnética é usada na engenharia aeronáutica?",
@@ -47,7 +47,7 @@ const questions = [
             "A detecção de falhas em estruturas metálicas das aeronaves por meio de correntes induzidas (Eddy Currents).",
             "O aumento da aerodinâmica das asas utilizando campos magnéticos pulsantes."
         ],
-        correct: 1
+        correct: 2
     }
     
 ];
