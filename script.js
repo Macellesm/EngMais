@@ -1,4 +1,4 @@
-const questions = [
+const quizData = [
     {
         question: "O que é indução magnética?",
         options: [
@@ -12,10 +12,10 @@ const questions = [
     {
         question: "Qual é a Lei de Faraday?",
         options: [
-            "A variação da corrente elétrica é proporcional ao tempo de variação do campo magnético.",
-            "A variação do campo elétrico é inversamente proporcional à distância.",
-            "A corrente elétrica gera um campo magnético em torno de um condutor.",
-            "A força magnética entre dois corpos é inversamente proporcional à sua massa."
+            "A variação da corrente elétrica é proporcional ao tempo de variação do campo magnético",
+            "A variação do campo elétrico é inversamente proporcional à distância",
+            "A corrente elétrica gera um campo magnético em torno de um condutor",
+            "A força magnética entre dois corpos é inversamente proporcional à sua massa"
         ],
         correct: 0
     },
@@ -30,94 +30,69 @@ const questions = [
         correct: 1
     },
     {
-        question: "Como a indução eletromagnética é usada na engenharia biomédica?",
+        question: "Qual das seguintes aplicações da indução eletromagnética é usada na engenharia biomédica?",
         options: [
-            "No diagnóstico de doenças por ressonância magnética.",
-            "No controle da pressão arterial.",
-            "Na reabilitação de membros.",
-            "Em sensores cardíacos."
+            "A criação de correntes elétricas no cérebro para modular atividades neurais, como na estimulação magnética transcraniana (TMS).",
+            "A geração de ondas magnéticas constantes para facilitar a circulação sanguínea em órgãos específicos.",
+            "A utilização de campos magnéticos para realizar cortes precisos em tecidos biológicos.",
+            "A aplicação de correntes magnéticas fixas para aumentar a resistência óssea."
         ],
         correct: 0
     },
     {
-        question: "Qual aplicação na engenharia aeronáutica envolve indução eletromagnética?",
+        question: "Como a indução eletromagnética é usada na engenharia aeronáutica?",
         options: [
-            "Propulsão elétrica de aeronaves.",
-            "Detecção de falhas em estruturas metálicas.",
-            "Monitoramento climático em voo.",
-            "Controle automatizado do trem de pouso."
+            "A geração de empuxo direto em aeronaves usando motores de combustão magnética.",
+            "A criação de sistemas de controle automático de cabine utilizando ímãs fixos.",
+            "A detecção de falhas em estruturas metálicas das aeronaves por meio de correntes induzidas (Eddy Currents).",
+            "O aumento da aerodinâmica das asas utilizando campos magnéticos pulsantes."
         ],
-        correct: 1
-    },
-    {
-        question: "Qual conceito físico está relacionado diretamente à indução magnética?",
-        options: [
-            "Fluxo magnético.",
-            "Carga elétrica.",
-            "Velocidade da luz.",
-            "Potência elétrica."
-        ],
-        correct: 0
+        correct: 2
     }
 ];
 
-let currentQuestion = 0;
-let score = 0;
+const quizContainer = document.getElementById("quiz");
+const resultsContainer = document.getElementById("results");
+const submitButton = document.getElementById("submit");
 
-function loadQuestion() {
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const nextBtn = document.getElementById("next");
+function buildQuiz() {
+    const output = quizData.map((currentQuestion, questionNumber) => {
+        const answers = currentQuestion.options.map(
+            (option, index) => `
+                <label>
+                    <input type="radio" name="question${questionNumber}" value="${index}">
+                    ${option}
+                </label>
+            `
+        ).join("");
+        return `
+            <div class="question">${currentQuestion.question}</div>
+            <div class="answers">${answers}</div>
+        `;
+    });
+    quizContainer.innerHTML = output.join("");
+}
 
-    const question = questions[currentQuestion];
-    questionEl.textContent = question.question;
-    optionsEl.innerHTML = "";
+function showResults() {
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+    let numCorrect = 0;
 
-    question.options.forEach((option, index) => {
-        const btn = document.createElement("button");
-        btn.textContent = option;
-        btn.className = "option";
-        btn.onclick = () => selectOption(btn, index);
-        optionsEl.appendChild(btn);
+    quizData.forEach((currentQuestion, questionNumber) => {
+        const answerContainer = answerContainers[questionNumber];
+        const selector = `input[name=question${questionNumber}]:checked`;
+        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+        if (Number(userAnswer) === currentQuestion.correct) {
+            numCorrect++;
+            answerContainers[questionNumber].style.color = "green";
+        } else {
+            answerContainers[questionNumber].style.color = "red";
+        }
     });
 
-    nextBtn.disabled = true;
+    resultsContainer.innerHTML = `${numCorrect} de ${quizData.length} corretas.`;
 }
 
-function selectOption(btn, index) {
-    const buttons = document.querySelectorAll(".option");
-    buttons.forEach((button) => button.classList.remove("selected"));
-    btn.classList.add("selected");
+buildQuiz();
+submitButton.addEventListener("click", showResults);
 
-    const nextBtn = document.getElementById("next");
-    nextBtn.disabled = false;
-    nextBtn.onclick = () => validateAnswer(index);
-}
-
-function validateAnswer(selectedIndex) {
-    const correctIndex = questions[currentQuestion].correct;
-
-    if (selectedIndex === correctIndex) {
-        score++;
-    }
-
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        loadQuestion();
-    } else {
-        showScore();
-    }
-}
-
-function showScore() {
-    const quizEl = document.getElementById("quiz");
-    const scoreContainer = document.getElementById("score-container");
-    const scoreEl = document.getElementById("score");
-
-    quizEl.style.display = "none";
-    scoreContainer.style.display = "block";
-    scoreEl.textContent = `Você acertou ${score} de ${questions.length} perguntas.`;
-}
-
-// Inicializa o quiz
-loadQuestion();
