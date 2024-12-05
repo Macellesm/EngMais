@@ -57,7 +57,9 @@ function loadQuestion() {
         optionsContainer.appendChild(button);
     });
 
+    // Esconder o botão "Próxima" até que uma opção seja selecionada
     document.getElementById('next').style.display = 'none';
+    document.getElementById('next').disabled = true;
 }
 
 function selectOption(index, button) {
@@ -72,7 +74,8 @@ function selectOption(index, button) {
     // Marcar a opção selecionada
     button.classList.add('selected');
     
-    // Habilitar o botão "Próxima"
+    // Mostrar o botão "Próxima" agora
+    document.getElementById('next').style.display = 'block';
     document.getElementById('next').disabled = false;
     document.getElementById('next').onclick = () => nextQuestion(index === question.correct);
 }
@@ -92,9 +95,6 @@ function nextQuestion(isCorrect) {
         currentQuestionIndex++;
         loadQuestion();
     }
-
-    // Resetar o botão "Próxima" após avançar
-    document.getElementById('next').disabled = true;
 }
 
 loadQuestion();
