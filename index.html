@@ -3,23 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz sobre Indução Eletromagnética</title>
+    <title>Quiz: Indução Eletromagnética</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Quiz sobre Indução Eletromagnética</h1>
+        <h1>Quiz: Indução Eletromagnética</h1>
         <div id="question-container">
-            <p id="question">Qual é a principal aplicação da indução eletromagnética?</p>
-            <div class="options">
-                <button class="option" onclick="checkAnswer(this)">Geração de energia</button>
-                <button class="option" onclick="checkAnswer(this)">Transmissão de dados</button>
-                <button class="option" onclick="checkAnswer(this)">Aquecimento de alimentos</button>
-                <button class="option" onclick="checkAnswer(this)">Armazenamento de energia</button>
-            </div>
+            <p id="question"></p>
+            <div id="options-container"></div>
         </div>
-        <div id="feedback"></div>
-        <button id="next-button" onclick="nextQuestion()">Próxima pergunta</button>
+        <button id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
     </div>
 
     <script src="quiz.js"></script>
