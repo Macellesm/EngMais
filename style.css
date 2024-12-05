@@ -7,23 +7,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Usa min-height para suportar telas menores */
+    min-height: 100vh;
 }
 
 .quiz-container {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Usa 90% para caber em telas menores */
+    width: 90%;
     max-width: 600px;
     padding: 20px;
-    box-sizing: border-box; /* Garante que padding não quebre o layout */
+    box-sizing: border-box;
 }
 
 h1 {
     text-align: center;
     color: #333;
-    font-size: 1.8em; /* Ajusta o tamanho para telas menores */
+    font-size: 1.8em;
 }
 
 #question {
@@ -34,31 +34,24 @@ h1 {
 }
 
 #options {
+    margin-top: 20px;
+}
+
+.option-container {
     display: flex;
-    flex-direction: column; /* Organiza as alternativas em coluna */
-    align-items: stretch; /* Faz os botões ocuparem toda a largura disponível */
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-#options button {
-    margin: 10px 0;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: white;
-    font-size: 1em; /* Tamanho ajustado para responsividade */
+.option-container input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #007BFF; /* Cor personalizada do botão radio */
+}
+
+.option-container label {
+    font-size: 1.2em;
+    color: #333;
     cursor: pointer;
-    width: 100%; /* Faz os botões se expandirem para ocupar toda a largura */
-    box-sizing: border-box; /* Garante que o padding não afete a largura total */
-    transition: background-color 0.3s;
-}
-
-#options button:hover {
-    background-color: #0056b3;
-}
-
-#score-container {
-    text-align: center;
 }
 
 #next {
@@ -78,6 +71,10 @@ h1 {
     background-color: #218838;
 }
 
+#score-container {
+    text-align: center;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     h1 {
@@ -88,9 +85,8 @@ h1 {
         font-size: 1.2em;
     }
 
-    #options button {
+    .option-container label {
         font-size: 1em;
-        padding: 12px;
     }
 
     #next {
@@ -107,9 +103,8 @@ h1 {
         font-size: 1em;
     }
 
-    #options button {
+    .option-container label {
         font-size: 0.9em;
-        padding: 10px;
     }
 
     #next {
