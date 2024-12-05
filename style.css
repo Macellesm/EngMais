@@ -1,49 +1,78 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
-    color: #333;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
-.quiz-container {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    width: 300px;
+.container {
+    background-color: white;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1 {
     text-align: center;
+    color: #333;
+}
+
+#question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#options {
+    display: flex;
+    flex-direction: column; /* Organiza as alternativas em coluna */
+    align-items: stretch; /* Faz os botões ocuparem toda a largura disponível */
 }
 
 #options button {
-    margin: 5px 0;
-    padding: 10px;
+    margin: 10px 0;
+    padding: 15px;
     border: none;
     border-radius: 5px;
-    background: #007BFF;
+    background-color: #007BFF;
     color: white;
+    font-size: 1.2em;
     cursor: pointer;
+    width: 100%; /* Faz os botões se expandirem para ocupar toda a largura */
+    box-sizing: border-box; /* Garante que o padding não afete a largura total */
+    transition: background-color 0.3s;
 }
 
 #options button:hover {
-    background: #0056b3;
+    background-color: #0056b3;
 }
 
-#next {
-    margin-top: 10px;
-    padding: 10px 15px;
-    background: #28a745;
+#result {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #28a745;
+}
+
+#next-button {
+    background-color: #28a745;
+    border-radius: 5px;
+    padding: 10px 20px;
     color: white;
     border: none;
-    border-radius: 5px;
+    font-size: 1.2em;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    display: none;
 }
 
-#next:disabled {
-    background: #aaa;
-    cursor: not-allowed;
+#next-button:hover {
+    background-color: #218838;
 }
