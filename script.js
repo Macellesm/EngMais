@@ -10,16 +10,6 @@ const questions = [
         correct: 0
     },
     {
-        question: "Qual é a Lei de Faraday?",
-        options: [
-            "A variação da corrente elétrica é proporcional ao tempo de variação do campo magnético",
-            "A variação do campo elétrico é inversamente proporcional à distância",
-            "A corrente elétrica gera um campo magnético em torno de um condutor",
-            "A força magnética entre dois corpos é inversamente proporcional à sua massa"
-        ],
-        correct: 0
-    },
-    {
         question: "Qual dispositivo utiliza a indução magnética?",
         options: [
             "Bússola",
@@ -30,78 +20,64 @@ const questions = [
         correct: 1
     },
     {
-        question: "Qual das seguintes aplicações da indução eletromagnética é usada na engenharia biomédica?",
+        question: "Quem descobriu a indução eletromagnética?",
         options: [
-            "A criação de correntes elétricas no cérebro para modular atividades neurais, como na estimulação magnética transcraniana (TMS).",
-            "A geração de ondas magnéticas constantes para facilitar a circulação sanguínea em órgãos específicos.",
-            "A utilização de campos magnéticos para realizar cortes precisos em tecidos biológicos.",
-            "A aplicação de correntes magnéticas fixas para aumentar a resistência óssea."
+            "Isaac Newton",
+            "Michael Faraday",
+            "Nikola Tesla",
+            "James Clerk Maxwell"
         ],
-        correct: 0
-    },
-    {
-        question: "Como a indução eletromagnética é usada na engenharia aeronáutica?",
-        options: [
-            "A geração de empuxo direto em aeronaves usando motores de combustão magnética.",
-            "A criação de sistemas de controle automático de cabine utilizando ímãs fixos.",
-            "A detecção de falhas em estruturas metálicas das aeronaves por meio de correntes induzidas (Eddy Currents).",
-            "O aumento da aerodinâmica das asas utilizando campos magnéticos pulsantes."
-        ],
-        correct: 2
+        correct: 1
     }
 ];
 
-let currentQuestionIndex = 0;
+let currentQuestion = 0;
 let score = 0;
 
-function displayQuestion() {
-    const questionContainer = document.getElementById('question-container');
-    const question = questions[currentQuestionIndex];
-    questionContainer.innerHTML = `
-        <p>${question.question}</p>
-        ${question.options.map((option, index) => `
-            <button class="option" onclick="selectOption(${index})">${option}</button>
-        `).join('')}
-    `;
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const nextBtn = document.getElementById('next');
+const scoreContainer = document.getElementById('score-container');
+const scoreEl = document.getElementById('score');
+
+function loadQuestion() {
+    const q = questions[currentQuestion];
+    questionEl.textContent = q.question;
+    optionsEl.innerHTML = '';
+
+    q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => selectOption(index);
+        optionsEl.appendChild(btn);
+    });
 }
 
 function selectOption(index) {
-    const buttons = document.querySelectorAll('.option');
-    const question = questions[currentQuestionIndex];
-
-    buttons.forEach((button, i) => {
-        if (i === question.correct) {
-            button.classList.add('selected');
-        } else if (i === index) {
-            button.classList.add('wrong');
-        }
-        button.disabled = true;
-    });
-
-    if (index === question.correct) {
+    const correctIndex = questions[currentQuestion].correct;
+    if (index === correctIndex) {
         score++;
     }
-
-    document.getElementById('next-button').style.display = 'block';
+    nextBtn.disabled = false;
 }
 
-function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        displayQuestion();
-        document.getElementById('next-button').style.display = 'none';
+function showScore() {
+    scoreContainer.style.display = 'block';
+    scoreEl.textContent = `Você acertou ${score} de ${questions.length} perguntas.`;
+}
+
+nextBtn.addEventListener('click', () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+        nextBtn.disabled = true;
     } else {
-        showResult();
+        questionEl.style.display = 'none';
+        optionsEl.style.display = 'none';
+        nextBtn.style.display = 'none';
+        showScore();
     }
-}
+});
 
-function showResult() {
-    const questionContainer = document.getElementById('question-container');
-    questionContainer.innerHTML = `
-        <h2>Quiz Concluído!</h2>
-        <p>Você acertou ${score} de ${questions.length} perguntas.</p>
-    `;
-    document.getElementById('next-button').style.display = 'none';
-}
-
-window.onload = displayQuestion;
+// Inicia o quiz
+loadQuestion();
