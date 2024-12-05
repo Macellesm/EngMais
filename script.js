@@ -1,95 +1,93 @@
 const questions = [
     {
-        question: "O que é indução eletromagnética?",
+        question: "O que é Indução Eletromagnética?",
         options: [
-            "Processo de gerar corrente elétrica através de variação de um campo magnético.",
-            "Processo de gerar corrente elétrica através de um circuito fechado.",
-            "Uso de um imã permanente para gerar eletricidade.",
-            "Transformação de energia elétrica em energia térmica."
+            "A produção de corrente elétrica através de um campo magnético",
+            "A alteração da resistência de um condutor com a variação de temperatura",
+            "A aceleração de partículas no interior de um campo elétrico",
+            "A movimentação de partículas com a ajuda de corrente elétrica"
         ],
         correct: 0
     },
     {
         question: "Qual é a Lei de Faraday?",
         options: [
-            "A variação do campo magnético gera um campo elétrico.",
-            "A variação do campo elétrico gera um campo magnético.",
-            "Campos magnéticos não influenciam correntes elétricas.",
-            "A corrente elétrica não tem efeito sobre campos magnéticos."
+            "A variação da corrente elétrica é proporcional ao tempo de variação do campo magnético",
+            "A variação do campo elétrico é inversamente proporcional à distância",
+            "A corrente elétrica gera um campo magnético em torno de um condutor",
+            "A força magnética entre dois corpos é inversamente proporcional à sua massa"
         ],
         correct: 0
     },
     {
-        question: "Qual das opções a seguir está relacionada a um tratamento terapêutico que utiliza campos magnéticos no cérebro?",
+        question: "Como a indução eletromagnética é usada na engenharia biomédica?",
         options: [
-            "Utilização de campos magnéticos para controle de dor crônica.",
-            "Estimulação de regiões cerebrais para o tratamento de condições neurológicas.",
-            "Uso de ondas eletromagnéticas para regeneração celular.",
-            "Aplicação de impulsos magnéticos para melhorar a circulação sanguínea."
+            "No diagnóstico de doenças através de imagens de ressonância magnética",
+            "No controle da pressão arterial através de circuitos magnéticos",
+            "Na criação de dispositivos para reabilitação de membros",
+            "Em sistemas de monitoramento cardíaco com sensores magnéticos"
         ],
-        correct: 1
+        correct: 0
     },
     {
-        question: "Como a indução eletromagnética é aplicada na aeronáutica?",
+        question: "Em que área da engenharia aeronáutica a indução eletromagnética é aplicada?",
         options: [
-            "Através da utilização de motores elétricos para movimentação de aeronaves.",
-            "Na geração de energia elétrica por sistemas de turbinas a gás.",
-            "No controle de sistemas de navegação por satélite.",
-            "Na detecção e monitoramento de falhas estruturais por sensores magnéticos."
+            "Na propulsão de aeronaves usando motores elétricos",
+            "Na detecção de falhas em sistemas de radar por meio de sensores magnéticos",
+            "No controle de tráfego aéreo utilizando tecnologia de navegação por indução",
+            "No aprimoramento de aviões stealth utilizando campos magnéticos"
         ],
-        correct: 3
+        correct: 1
     }
 ];
 
 let currentQuestionIndex = 0;
 
-function displayQuestion() {
+function loadQuestion() {
     const question = questions[currentQuestionIndex];
     document.getElementById('question').textContent = question.question;
     const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
 
     question.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.classList.add('option');
-        optionElement.textContent = option;
-        optionElement.onclick = () => selectOption(optionElement, index);
-        optionsContainer.appendChild(optionElement);
+        const button = document.createElement('button');
+        button.classList.add('option');
+        button.textContent = option;
+        button.onclick = () => selectOption(index);
+        optionsContainer.appendChild(button);
     });
+
+    document.getElementById('next-button').style.display = 'none';
 }
 
-function selectOption(optionElement, selectedIndex) {
+function selectOption(index) {
     const question = questions[currentQuestionIndex];
-    const optionsContainer = document.getElementById('options-container');
-    
-    // Remover seleção anterior
-    const allOptions = optionsContainer.querySelectorAll('.option');
-    allOptions.forEach(option => option.classList.remove('selected'));
-    
-    // Marcar a opção selecionada
-    optionElement.classList.add('selected');
-
-    // Verificar se a opção selecionada é correta ou incorreta
-    if (selectedIndex === question.correct) {
-        optionElement.classList.add('correct');
-    } else {
-        optionElement.classList.add('incorrect');
-    }
-
-    // Desabilitar todas as outras opções
-    allOptions.forEach(option => option.style.pointerEvents = 'none');
+    const options = document.querySelectorAll('.option');
+    options.forEach((option, i) => {
+        option.classList.remove('selected');
+        if (i === index) {
+            option.classList.add('selected');
+        }
+    });
+    document.getElementById('next-button').style.display = 'block';
+    document.getElementById('next-button').onclick = () => nextQuestion(index === question.correct);
 }
 
-function nextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
+function nextQuestion(isCorrect) {
+    const isLastQuestion = currentQuestionIndex === questions.length - 1;
+    if (isCorrect) {
+        alert("Resposta correta!");
+    } else {
+        alert("Resposta incorreta!");
+    }
+
+    if (isLastQuestion) {
+        alert("Fim do quiz!");
+        currentQuestionIndex = 0;
+    } else {
         currentQuestionIndex++;
-        displayQuestion();
-    } else {
-        alert('Fim do quiz!');
+        loadQuestion();
     }
 }
 
-// Inicializa o quiz
-window.onload = () => {
-    displayQuestion();
-};
+loadQuestion();
