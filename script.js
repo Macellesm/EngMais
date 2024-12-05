@@ -39,7 +39,7 @@ const questions = [
         ],
         correct: 0
     },
-     {
+    {
         question: "Como a indução eletromagnética é usada na engenharia aeronáutica?",
         options: [
             "A geração de empuxo direto em aeronaves usando motores de combustão magnética.",
@@ -49,7 +49,6 @@ const questions = [
         ],
         correct: 2
     }
-    
 ];
 
 let currentQuestion = 0;
@@ -67,19 +66,41 @@ function loadQuestion() {
     optionsEl.innerHTML = '';
 
     q.options.forEach((option, index) => {
-        const btn = document.createElement('button');
-        btn.textContent = option;
-        btn.onclick = () => selectOption(index);
-        optionsEl.appendChild(btn);
+        const optionContainer = document.createElement('div');
+        optionContainer.classList.add('option-container');
+
+        const radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'quiz-option';
+        radio.id = `option-${index}`;
+        radio.value = index;
+
+        const label = document.createElement('label');
+        label.htmlFor = `option-${index}`;
+        label.textContent = option;
+
+        optionContainer.appendChild(radio);
+        optionContainer.appendChild(label);
+        optionsEl.appendChild(optionContainer);
+    });
+
+    // Desabilita o botão "Próxima" inicialmente
+    nextBtn.disabled = true;
+
+    // Habilita o botão "Próxima" apenas se uma opção for selecionada
+    optionsEl.addEventListener('change', () => {
+        nextBtn.disabled = !document.querySelector('input[name="quiz-option"]:checked');
     });
 }
 
-function selectOption(index) {
-    const correctIndex = questions[currentQuestion].correct;
-    if (index === correctIndex) {
+function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="quiz-option"]:checked');
+    if (!selectedOption) return;
+
+    const selectedIndex = parseInt(selectedOption.value);
+    if (selectedIndex === questions[currentQuestion].correct) {
         score++;
     }
-    nextBtn.disabled = false;
 }
 
 function showScore() {
@@ -88,10 +109,11 @@ function showScore() {
 }
 
 nextBtn.addEventListener('click', () => {
+    checkAnswer();
+
     currentQuestion++;
     if (currentQuestion < questions.length) {
         loadQuestion();
-        nextBtn.disabled = true;
     } else {
         questionEl.style.display = 'none';
         optionsEl.style.display = 'none';
