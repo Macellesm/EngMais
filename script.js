@@ -1,6 +1,6 @@
 const questions = [
     {
-        question: "O que é indução magnética?",
+        question: "O que é indução eletromagnética?",
         options: [
             "A criação de um campo elétrico por um campo magnético variável.",
             "A criação de um campo magnético por uma corrente elétrica constante.",
@@ -10,7 +10,7 @@ const questions = [
         correct: 0
     },
     {
-        question: "Qual dispositivo utiliza a indução magnética?",
+        question: "Qual dispositivo utiliza a indução eletromagnética?",
         options: [
             "Bússola",
             "Transformador",
